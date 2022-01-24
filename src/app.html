@@ -144,7 +144,7 @@
 
   <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-      <img src="/assets/logo-header.png" height=40 alt="MADAMS EDITOR" loading="lazy">
+      <img src="./assets/logo-header.png" height=40 alt="MADAMS EDITOR" loading="lazy">
     </a>
 
     <a class="nav-link btn btn-primary" id="convert-btn" href="#" title="Apply Mapping (Ctrl + Enter)">
@@ -214,10 +214,15 @@
 </body>
 
 <script src="dropdown.js"></script>
-<script id="js-entrypoint" src="app.js"></script>
+<script type="module" id="js-entrypoint" src="app.js"></script>
 <script type="text/javascript">
   let options = {};
-  if (process.env.NODE_ENV === 'development') {
+  window.process = {
+    env: {
+        NODE_ENV: 'development'
+    }
+  };
+  if (process && process.env.NODE_ENV === 'development') {
     options = {
       'data': {
         'type': 'url' , // url|json

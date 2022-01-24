@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pre:dev": "rm -rf dist/dev .cache/* && mkdir dist/dev && ln -s /usr/src/app/dist/ dist/dev/dist",
+    "pre:dev": "rm -rf dist/dev .cache/* .parcel-cache/* && mkdir dist/dev",
     "dev": "npm run dev-server & npm run dev-app",
     "dev-server": "nodemon src/server.js -w src/",
-    "dev-app": "npm run app -- --hmr-port $APP_PORT_HMR --host 0.0.0.0",
+    "dev-app": "npm run app -- --hmr-port 1235 --host 0.0.0.0",
     "server": "node src/server.js",
-    "app": "npm run pre:dev && parcel src/app.html --out-file index.html --out-dir dist/dev --port $APP_PORT --global MadamsEditor",
+    "app": "npm run pre:dev && parcel src/app.html --dist-dir dist/dev --port 1234",
     "build": "npm run build-app && npm run build-server",
     "build-server": "echo \"Nothing else todo.\"",
-    "build-app": "rm -rf dist/index.* dist/app.* && parcel build src/app.html --out-file index.html --public-url ./ --global MadamsEditor"
+    "build-app": "rm -rf dist/index.* dist/app.* && parcel build src/app.html --public-url ./"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.6",
-    "parcel-bundler": "^1.12.4"
+    "parcel": "^2.0.0"
   },
   "browserslist": [
     "since 2017-06"
