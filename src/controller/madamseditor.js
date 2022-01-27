@@ -13,9 +13,6 @@ import "ace-builds/webpack-resolver";
 // load workers from CDN, keeps our public/dist clean...
 ace.config.set('workerPath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.13/src-min-noconflict');
 
-// resizeable columns
-import Split from 'split.js'
-
 let _GLOBAL = {
     instance: null,
     config: {
@@ -213,28 +210,6 @@ class MadamsEditor_UI {
         if (mapping.name && mapping.name != "") {
             document.querySelector('#mapping-filename').textContent = mapping.name;
         }
-
-        // init resizeable columns
-        console.log('Now using Split lib');
-        Split(['#leftCol', '#rightCol'], {
-            gutterSize: 5,
-            onDragEnd: () => {
-                this.outEditor.resize();
-            }
-        });
-        Split(['#mapping-wrapper', '#data-wrapper'], {
-            direction: 'vertical',
-            gutterSize: 5,
-            onDragEnd: () => {
-                this.mappingEditor.resize();
-                this.dataEditor.resize();
-            }
-        });
-        // fix remove initial col/h-50 style to enable resizeable
-        document.querySelector("#leftCol").classList.remove('col');
-        document.querySelector("#rightCol").classList.remove('col');
-        document.querySelector("#mapping-wrapper").classList.remove('h-50');
-        document.querySelector("#data-wrapper").classList.remove('h-50');
     }
 
     handleClickRunBtn() {
