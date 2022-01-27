@@ -573,7 +573,7 @@ class MadamsEditor_Parser {
             }
         });
         try {
-            let json = jsyaml.parse(yaml);
+            let json = jsyaml.load(yaml, null, null, true);
             if (json.prefixes) {
                 prefixes = Object.assign({}, prefixes, json.prefixes)
             }
