@@ -1,15 +1,17 @@
-import yarrrml from '@rmlio/yarrrml-parser/lib/rml-generator'
+//import yarrrml from '@rmlio/yarrrml-parser/lib/rml-generator'
+let yarrrml_lib = require('@rmlio/yarrrml-parser/lib/rml-generator');
 import jsyaml from 'js-yaml';
 const N3 = require('n3');
 
-// load ace editor, thems and modes
-import 'ace-builds/src-min-noconflict/ace'
+// load ace editor, themes and modes
+import ace from 'ace-builds/src-min-noconflict/ace'
 import 'ace-builds/src-min-noconflict/theme-tomorrow'
 import 'ace-builds/src-min-noconflict/mode-yaml'
 import 'ace-builds/src-min-noconflict/mode-turtle'
 import 'ace-builds/src-min-noconflict/mode-json'
+import "ace-builds/webpack-resolver";
 // load workers from CDN, keeps our public/dist clean...
-ace.config.set('workerPath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-min-noconflict');
+ace.config.set('workerPath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.13/src-min-noconflict');
 
 // resizeable columns
 import Split from 'split.js'
@@ -30,7 +32,7 @@ let _GLOBAL = {
             },
             rmlMapperUrl: '',
             // callback
-            run: function(mapping, result) {}
+            run: function() {}
         }
     },
     prefixes: {
@@ -213,16 +215,17 @@ class MadamsEditor_UI {
         }
 
         // init resizeable columns
+        console.log('Now using Split lib');
         Split(['#leftCol', '#rightCol'], {
             gutterSize: 5,
-            onDragEnd: (sizes) => {
+            onDragEnd: () => {
                 this.outEditor.resize();
             }
         });
         Split(['#mapping-wrapper', '#data-wrapper'], {
             direction: 'vertical',
             gutterSize: 5,
-            onDragEnd: (sizes) => {
+            onDragEnd: () => {
                 this.mappingEditor.resize();
                 this.dataEditor.resize();
             }
@@ -234,7 +237,7 @@ class MadamsEditor_UI {
         document.querySelector("#data-wrapper").classList.remove('h-50');
     }
 
-    handleClickRunBtn(e) {
+    handleClickRunBtn() {
         let result = false;
         const btn = document.querySelector("#convert-btn");
         btn.classList.add('disabled')
@@ -248,7 +251,7 @@ class MadamsEditor_UI {
             return this.parser.rdf2Turtle(res)
         })
         .then(res => {
-            result = res.replace(/\.\n([\w\<])/g, ".\n\n$1");
+            result = res.replace(/\.\n([\w<])/g, ".\n\n$1");
             this.editorSetValue(this.outEditor, result)
             this.addMessage('success', 'RML mapping OK')
         })
@@ -304,7 +307,7 @@ class MadamsEditor_UI {
 
     loadData(url = "", target = null) {
         if (url == "" ) {
-            return new Promise((resolve, reject) => { resolve(true) });
+            return new Promise((resolve) => { resolve(true) });
         }
         return new Promise((resolve, reject) => {
             fetch(url)
@@ -525,7 +528,7 @@ class MadamsEditor_Parser {
 
     yarrrml2RML(yaml) {
         const self = this;
-        const y2r = new yarrrml();
+        const y2r = new yarrrml_lib();
         const writer = new N3.Writer();
         let quads;
         try {
@@ -542,7 +545,7 @@ class MadamsEditor_Parser {
 
         writer.addQuads(quads);
         return new Promise((resolve, reject) => {
-            writer.end( (err,doc) => err ? eject(e) : resolve(doc));
+            writer.end( (err,doc) => err ? reject(err) : resolve(doc));
         });
     }
 
@@ -561,7 +564,7 @@ class MadamsEditor_Parser {
         }
 
         return new Promise((resolve, reject) => {
-            parser.parse(rdf, (err, quad, prefixes) => {
+            parser.parse(rdf, (err, quad) => {
                 if (err)
                     return reject('N3 parser error: ' + err);
                 if (quad)
@@ -589,7 +592,7 @@ class MadamsEditor_Parser {
             }
         });
         try {
-            let json = YAML.parse(yaml);
+            let json = jsyaml.parse(yaml);
             if (json.prefixes) {
                 prefixes = Object.assign({}, prefixes, json.prefixes)
             }
