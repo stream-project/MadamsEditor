@@ -5,8 +5,8 @@
   "author": "",
   "license": "CC-BY-SA",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service serve",
+    "build": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -31,14 +31,14 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.2.26",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-vue": "^7.20.0"
+    "eslint-plugin-vue": "^8.4.0"
   },
   "eslintConfig": {
     "root": true,

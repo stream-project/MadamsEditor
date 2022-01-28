@@ -1,5 +1,5 @@
 <template>
-  <navbar />
+  <nav-bar />
 
   <main role="main" class="">
 
@@ -42,7 +42,7 @@
 import MadamsEditor from './controller/madamseditor.js'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import navbar from './components/navbar.vue'
+import NavBar from './components/navbar.vue'
 import MappingEditor from './components/mapping-editor.vue'
 import DataEditor from './components/data-editor.vue'
 import OutEditor from './components/out-editor.vue'
@@ -50,7 +50,7 @@ import OutEditor from './components/out-editor.vue'
 export default {
     name: 'App',
     components: {
-      Splitpanes, Pane, navbar, MappingEditor, DataEditor, OutEditor
+      Splitpanes, Pane, NavBar, MappingEditor, DataEditor, OutEditor
     },
     data() {
         return {

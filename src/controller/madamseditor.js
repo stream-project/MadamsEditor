@@ -367,13 +367,14 @@ class MadamsEditor_UI {
 }
 
 class MadamsEditor_Parser {
-
-    escapeTable = {
-        '(': '\\$LBR',
-        ')': '\\$RBR',
-        '{': '\\$LCB',
-        '}': '\\$RCB',
-      };
+    constructor() {
+      this.escapeTable = {
+          '(': '\\$LBR',
+          ')': '\\$RBR',
+          '{': '\\$LCB',
+          '}': '\\$RCB',
+        };
+    }
 
     init(parent) {
         this.config = parent.config;
