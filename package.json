@@ -7,7 +7,8 @@
   "scripts": {
     "serve": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service serve",
     "build": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "pre:build": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js"
   },
   "dependencies": {
     "@dvuckovic/vue3-bootstrap-icons": "^1.0.4",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@testing-library/vue": "^6.4.2",
     "@vue/cli-plugin-babel": "^4.5.15",
     "@vue/cli-plugin-eslint": "^4.5.15",
     "@vue/cli-service": "~4.5.0",
