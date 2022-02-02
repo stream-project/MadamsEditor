@@ -8,7 +8,7 @@
     "serve": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service serve",
     "build": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "pre:build": "cp logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js"
+    "service": "node src/server.js"
   },
   "dependencies": {
     "@dvuckovic/vue3-bootstrap-icons": "^1.0.4",
