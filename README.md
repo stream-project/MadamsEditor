@@ -1,6 +1,6 @@
 # MaDaMs Editor (**Ma**terial **Da**ta **M**apping)
 
-(yet simple) Text based editor to map JSON data with [YARRRML](http://rml.io/yarrrml/) (a human-readible form of RDF Mapping Language [[RML](https://rml.io/specs/rml/)]) to RDF. Demo available [here](https://aksw.github.io/MadamsEditor/dist/).
+(yet simple) Text based editor to map JSON data with [YARRRML](http://rml.io/yarrrml/) (a human-readible form of RDF Mapping Language [[RML](https://rml.io/specs/rml/)]) to RDF.
 
 The RML to YARRRML is based on [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser).
 
@@ -8,43 +8,32 @@ To apply the mappings on the data an RML Mapper service is **required**. We use 
 
 ## Screenshot
 
-[![Screenshot](./screenshot.png)](https://aksw.github.io/MadamsEditor/dist/)
+[![Screenshot](./screenshot.png)]
 
-## Init, install packages
+## Deployment
 
-    docker-compose up install
+This software consists of two parts: the GUI (VueJS 3) and the middleware (NodeJS).
 
-## Start development environment
+Both have to be started manually or in docker.
 
-Run installation first, then:
+## Manually
 
-    docker-compose up dev
+Initialize:
+`npm install`
 
-Access app at `http://localhost:1234` and RML mapping server at `http://localhost:3000`
+Service:
+`node server.js`
 
-To change default ports edit file `.env`
+GUI:
+`npm run serve`
 
-## Create productive build
+## Docker
 
-Run installation first, then
+Use the images from Github:
 
-    docker-compose up build
+In this repository is also an example docker-compose file.
 
-Will create files in `./dist/`
-
-## Start productive
-
-The productive requires one server to deliver the HTML/Javascript app and a Node server for the RML mapper.
-
-1) Create build
-2) App: make content of `./dist/` public available
-3) Server: start mapping server with Docker `docker-compose up server` or directly with Node `node src/server.js`. To change default port (3000) edit file `.env`.
-
-### Usage
-
-See `./src/app.html` for usage example.
-
-Usage as library:
+## Usage as library
 
 ```js
 new MadamsEditor({
@@ -67,7 +56,7 @@ new MadamsEditor({
 });
 ```
 
-# Ressources
+## Ressources
 
 - [RML](https://rml.io/specs/rml/)
 - [YARRRML](https://rml.io/yarrrml/spec/)
@@ -75,7 +64,7 @@ new MadamsEditor({
 - [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser)
 - [RocketRML](https://github.com/semantifyit/RocketRML)
 
-# packages
+## Packages
 
 ```
 "@rmlio/yarrrml-parser": "^1.2.1",  #convert YARRRML rules to RML or R2RML rules

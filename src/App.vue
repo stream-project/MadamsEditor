@@ -101,39 +101,23 @@ export default {
     mounted() {
         console.log(process.env);
 
-        let options = {};
-        window.process = {
-          env: {
-              NODE_ENV: 'development'
-          }
+        let options = {
+          'data': {
+            'type': 'url' , // url|json
+            'value': './example-data.json', // string|json
+            // 'name': '' // string (required for json)
+          },
+          'mapping': {
+            'type': 'url' , // url|yaml
+            'value': './example-mapping.yml', // string
+            //'name': '' // string (required for yaml)
+          },
+          'rmlMapperUrl': 'http://localhost:3000/rmlmapper'
         };
-        if (process && process.env.NODE_ENV === 'development') {
-          options = {
-            'data': {
-              'type': 'url' , // url|json
-              'value': './example-data.json', // string|json
-              // 'name': '' // string (required for json)
-            },
-            'mapping': {
-              'type': 'url' , // url|yaml
-              'value': './example-mapping.yml', // string
-              //'name': '' // string (required for yaml)
-            },
-            'rmlMapperUrl': 'http://localhost:3000/rmlmapper'
-          }
-        } else {
-          options = {
-            'data': {
-              'type': 'url' ,
-              'value': './example-material-data.json',
-            },
-            'mapping': {
-              'type': 'url' ,
-              'value': './example-material-mapping.yml',
-            },
-            'rmlMapperUrl': 'https://ledot.de/rmlmapper'
-          }
-        }
+
+        if (process.env.SERVICE_URL)
+          options.rmlMapperUrl = process.env.SERVICE_URL;
+
         options.run = function (mapping, result) {
           // the variable 'this' contains the MadamsEditor class
           console.log('Run', mapping, result);
