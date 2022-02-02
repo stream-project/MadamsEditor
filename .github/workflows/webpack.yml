@@ -25,5 +25,4 @@ jobs:
     - name: Build
       run: |
         npm install
-        cp ./logger.js node_modules/@rmlio/yarrrml-parser/lib/logger.js
         npm run build
