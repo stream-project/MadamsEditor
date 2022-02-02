@@ -5,10 +5,10 @@ services:
     environment:
       - SERVICE_URL=http://service:3000/rmlmapper
     ports:
-      - 80:80
+      - 80:8080
 
   service:
     image: ghcr.io/stream-project/rmleditor:master
-    entrypoint: npm run server
+    entrypoint: npm run service
     ports:
       - 3000:3000
