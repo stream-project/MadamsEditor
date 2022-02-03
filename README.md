@@ -8,7 +8,7 @@ To apply the mappings on the data an RML Mapper service is **required**. We use 
 
 ## Screenshot
 
-[![Screenshot](./screenshot.png)]
+![Screenshot](./screenshot.png)
 
 ## Deployment
 
@@ -62,6 +62,7 @@ Github Action does publish the docker image on Githubs registry. At the end of t
 
 You could do it by yourself also:
 `curl -v stream-dataspace.net:81/hooks/redeploy -H "Authorization: secret" --data "redeploy=rmleditor" -X POST`
+The secret value could be found in the webhook config on the server.
 
 ## Ressources
 
