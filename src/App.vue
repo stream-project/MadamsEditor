@@ -112,11 +112,8 @@ export default {
             'value': './example-mapping.yml', // string
             //'name': '' // string (required for yaml)
           },
-          'rmlMapperUrl': 'http://localhost:3000/rmlmapper'
+          'rmlMapperUrl': process.env.VUE_APP_SERVICE_URL
         };
-
-        if (process.env.SERVICE_URL)
-          options.rmlMapperUrl = process.env.SERVICE_URL;
 
         options.run = function (mapping, result) {
           // the variable 'this' contains the MadamsEditor class
