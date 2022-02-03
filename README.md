@@ -29,7 +29,7 @@ GUI:
 
 ## Docker
 
-Use the images from Github:
+Use the images from Github: ghcr.io/stream-project/rmleditor:master
 
 In this repository is also an example docker-compose file.
 
@@ -55,6 +55,13 @@ new MadamsEditor({
     run: function(mapping, result) { }
 });
 ```
+
+## CD
+
+Github Action does publish the docker image on Githubs registry. At the end of the workflow a webhook on the stream server is called which does redeploy the RMLEditor.
+
+You could do it by yourself also:
+`curl -v stream-dataspace.net:81/hooks/redeploy -H "Authorization: secret" --data "redeploy=rmleditor" -X POST`
 
 ## Ressources
 
