@@ -14,6 +14,7 @@ const app = express();
 const router = express.Router();
 
 app.use(cors());
+app.options('*', cors());
 
 // set header
 app.use((req, res, next) => {
