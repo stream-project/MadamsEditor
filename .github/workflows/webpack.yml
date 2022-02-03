@@ -61,4 +61,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Webhook for redeployment
+        uses: zzzze/webhook-trigger@master
+        with:
+          data: "redeploy=rmleditor"
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          options: "-H \"Authorization: ${{ secrets.WEBHOOK_SECRET }}\""
 
