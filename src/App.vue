@@ -25,9 +25,15 @@
             </splitpanes>
           </pane>
           <pane id="rightCol" class="col split">
-            <div id="out-wrapper" class="editor-wrapper h-100">
-              <out-editor />
-            </div>
+            <splitpanes horizontal :push-other-panes="false">
+              <pane id="rml-wrapper" class="editor-wrapper split">
+                <rml-viewer />
+              </pane>
+
+              <pane id="out-wrapper" class="editor-wrapper split">
+                <out-editor />
+              </pane>
+            </splitpanes>
           </pane>
         </splitpanes>
       </div>
@@ -45,12 +51,13 @@ import 'splitpanes/dist/splitpanes.css'
 import NavBar from './components/navbar.vue'
 import MappingEditor from './components/mapping-editor.vue'
 import DataEditor from './components/data-editor.vue'
+import RmlViewer from './components/rml-viewer.vue'
 import OutEditor from './components/out-editor.vue'
 
 export default {
     name: 'App',
     components: {
-      Splitpanes, Pane, NavBar, MappingEditor, DataEditor, OutEditor
+      Splitpanes, Pane, NavBar, MappingEditor, DataEditor, RmlViewer, OutEditor
     },
     data() {
         return {

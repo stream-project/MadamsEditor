@@ -165,6 +165,12 @@ class MadamsEditor_UI {
             self.handleUpdateYarrmlEditor();
         });
 
+        // init rml teditor
+        this.rmlEditor = ace.edit("rml-viewer", {
+            mode: "ace/mode/turtle",
+            theme: "ace/theme/tomorrow",
+        });
+
         // init out teditor
         this.outEditor = ace.edit("out-editor", {
             mode: "ace/mode/turtle",
@@ -280,6 +286,10 @@ class MadamsEditor_UI {
             mappingStr = self.parser.yarrrmlEncodeBrackets(mappingStr);
 
             self.parser.yarrrml2RML(mappingStr)
+            .then(rml => {
+              console.log('RML:', rml);
+              this.editorSetValue(this.rmlEditor, rml)
+            })
             .catch(e => {
                 self.addMessage('error', e);
             })

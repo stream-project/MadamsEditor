@@ -1,6 +1,6 @@
 <template>
   <div class="editor-title">
-    <span id="mapping-filename">YARRRML Mapping</span> <small class="text-muted">(YAML)</small>
+    <span id="mapping-filename">Mapping</span> <small class="text-muted">(YARRRML)</small>
     <div class="float-right">
       <div class="dropdown dropleft">
         <button class="btn btn-sm" type="button" id="dropdownMenu-mapping" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
