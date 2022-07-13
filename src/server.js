@@ -64,7 +64,7 @@ app.post('/rmlmapper', async (req, res, next) => {
       res.status(500).send({ error: 'There is an issue with the server - contact an admin.' });
     }
 
-    const rmlmapperPath = '/home/kjunghanns/Documents/STREAM/RMLEditor/rmlmapper.jar';
+    const rmlmapperPath = 'rmlmapper.jar';
     const tempFolderPath = './temp/';
 
     const rml = fs.readFileSync('temp/mapping.rml.ttl', 'utf-8');
