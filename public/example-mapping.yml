@@ -1,6 +1,9 @@
 prefixes:
   schema: "http://schema.org/"
   mefx: "https://github.com/AKSW/MadamsEditor/functions.ttl#"
+  dcat2: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  vcard: "http://www.w3.org/2006/vcard/ns#"
 sources:
   file:
     access: "data.file"
@@ -11,7 +14,36 @@ mappings:
   test:
     sources:
       - file
-    s: http://example.com/$(name)
+    s: https://dsms.stream-dataspace.net/datasets/$(Object ID tensile test specimen)
     po:
-      - [a, schema:person]
-      - [schema:name, $(value)]
+      - [a, dcat2:Dataset]
+      - [dcterms:title, STREAM_$(Object ID tensile test specimen)]
+      - p: dcat2:distribution
+        o:
+          mapping: distribution
+      - [dcterms:description, $(Object ID tensile test specimen) $(Excel sheet name Messdaten) von $(Material name) mit $(Name optical strain measurement system)]
+      - p: dcat2:contactPoint
+        o:
+          mapping: cp
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/en"]
+      - [dcterms:license, "https://creativecommons.org/licenses/by-nc-nd/4.0/"]
+      - [dcat2:landingPage, "http://dsms.stream-dataspace.net/"]
+  distribution:
+    sources:
+      - file
+    s: https://www.simphony-project.eu/entity#$(Value Youngs Modulus E)
+    po:
+      - [a, dcat2:Distribution]
+      - [dcterms:title, STREAM_$(Object ID tensile test specimen)]
+      - [dcat2:downloadURL, $(URL xls file raw data)]
+      - [dcat2:mediaType, https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]
+  cp:
+    sources:
+      - file
+    s: https://www.simphony-project.eu/entity#3a516b9d-38a9-4f1a-800f-0db8ccb9d0c0
+    po:
+      - [vcard:family-name, "Weber"]
+      - [vcard:given-name, "Matthias"]
+      - [vcard:hasEmail, "mailto\:matthias.weber@iwm.fraunhofer.de"]
+      - [vcard:hasOrganizationName, "https://www.iwm.fraunhofer.de"]
+      - [vcard:nickname, "wbr"]

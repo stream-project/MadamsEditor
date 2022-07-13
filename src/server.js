@@ -78,7 +78,7 @@ app.post('/rmlmapper', async (req, res, next) => {
         const ret = await wrapper.execute(rml, {sourcesFile, generateMetadata: false, serialization: 'turtle'});
         res.send(ret.output)
     } catch (error) {
-        console.log(error);
+        console.log(error.toString(), error.log);
         res.status(500).send({ error: error.toString() });
     }
 })
