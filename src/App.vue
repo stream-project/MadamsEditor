@@ -111,7 +111,7 @@ export default {
         let options = {
           'data': {
             'type': 'url' , // url|json
-            'value': './example-data.json', // string|json
+            'value': './data.file', // string|json
             // 'name': '' // string (required for json)
           },
           'mapping': {

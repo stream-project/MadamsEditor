@@ -1,0 +1,39 @@
+name;value
+Object ID (tensile test specimen);ARI_Al16_S4_Z
+Value of diameter (tensile test specimen);4
+Unit symbol of diameter (tensile test specimen);mm
+Material name;AlSi10Mg
+Comment (process evaluation of specimen preparation);OK
+IWM short name (operator tensile test);
+Date time end of process (yyyy-mm-dd hh:mm:ss);
+Date time start of process (yyyy-mm-dd hh:mm:ss);
+Name tensile testing machine;SZM 500
+Name load cell;
+Name optical strain measurement system;Aramis (HG-Kamera)
+Value strain rate in loading direction (process parameter);
+Unit symbol strain rate in loading direction (process parameter);
+Value (crosshead separation rate, process parameter);0.03
+Unit symbol (crosshead separation rate, process parameter);mm/s
+Value original gauge length (process parameter);10000
+Unit symbol original gauge length (process parameter);µm
+Comment  (after tensile test by operator);OK
+File name xls file (raw data);IWM_TT_ARI_Al16_S4_Z.xlsm
+URL xls file (raw data);file://nasp0.iwm.fraunhofer.de/projekte/gf7/837725.MaterialDigital/6_Ergebnisse/8_Datenraum-2020/Datenraum-2020/4_Rodatenablage/
+Excel sheet name (Messdaten);Messdaten
+Number of header lines in xls sheet (raw data);19
+ColumnNumber TestingTime (raw data);1
+Column number (ForceInLoadingDirection, raw data);3
+Column number (optical displacement as is, raw data);2
+Column number (eng. strain in loading direction, raw data);12
+Column number (eng. stress in loading direction, raw data);13
+UnitSymbol TestingTime (raw data);s
+Unit symbol (ForceInLoadingDirection, raw data);kN
+Unit symbol (optical displacement as is, raw data file);mm
+Unit symbol (eng. strain in loading direction, raw data);mm/mm
+Unit symbol (eng. stress in loading direction, raw data);MPa
+Value (Rp02);142
+Value (maximum tensile strength Rm);200
+Value (Youngs Modulus E);77801
+Unit symbol (Rp02, Rm, E);MPa
+Value (percentage elongation after fracture, A);0.036
+Unit symbol (percentage elongation after fracture, A);mm/mm

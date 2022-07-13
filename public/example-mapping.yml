@@ -1,18 +1,17 @@
 prefixes:
   schema: "http://schema.org/"
   mefx: "https://github.com/AKSW/MadamsEditor/functions.ttl#"
+sources:
+  file:
+    access: "data.file"
+    referenceFormulation: "csv"
+    delimiter: ";"
+    iterator: "\n"
 mappings:
-  person:
+  test:
     sources:
-      # select only public persons
-      - ['example-data.json~jsonpath', '$.persons[?(@.public)]']
-    s: http://example.com/$(firstname)
+      - file
+    s: http://example.com/$(name)
     po:
-      - [a, schema:Person]
-      - [schema:name, $(firstname)]
-      - p: schema:language
-        o:
-          # use predefined function toUpperCase  from ./functions.ttl
-          - function: mefx:toUpperCase
-            parameters:
-              - [str1, $(speaks.*)]
+      - [a, schema:person]
+      - [schema:name, $(value)]

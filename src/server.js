@@ -3,7 +3,8 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors');
-const rmlParser = require("rocketrml");
+const RMLMapperWrapper = require('@rmlio/rmlmapper-java-wrapper');
+const fs = require('fs');
 
 // Constants
 const { SERVER_PORT = '3000' } = process.env
@@ -48,24 +49,36 @@ app.get('/', (req, res) => {
 app.post('/rmlmapper', async (req, res, next) => {
     req.accepts('application/json')
 
-    const mapping = req.body.rml || false;
+    const mapping = req.body.rml.replace('data.file', 'temp/output.turtle') || false;
     const sources = req.body.sources || false;
     if (!mapping || !sources) {
         return res.status(500).send({ error: 'Parameter missing!' })
     }
 
-    const options = {
-        toRDF: true,
-        verbose: false,
-        xmlPerformanceMode: false,
-        replace: false,
-        functions: predefinedFunctions()
+    try {
+      fs.writeFileSync('temp/output.turtle', sources[Object.keys(sources)[0]].toString());
+      fs.writeFileSync('temp/mapping.rml.ttl', mapping);
+      // file written successfully
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'There is an issue with the server - contact an admin.' });
+    }
+
+    const rmlmapperPath = '/home/kjunghanns/Documents/STREAM/RMLEditor/rmlmapper.jar';
+    const tempFolderPath = './temp/';
+
+    const rml = fs.readFileSync('temp/mapping.rml.ttl', 'utf-8');
+    const sourcesFile = {
+      'output.turtle': fs.readFileSync('temp/output.turtle', 'utf-8')
     };
 
+    const wrapper = new RMLMapperWrapper(rmlmapperPath, tempFolderPath, true);
+
     try {
-        const ret = await rmlParser.parseFileLive(mapping, sources, options);
-        res.send(ret)
+        const ret = await wrapper.execute(rml, {sourcesFile, generateMetadata: false, serialization: 'turtle'});
+        res.send(ret.output)
     } catch (error) {
+        console.log(error);
         res.status(500).send({ error: error.toString() });
     }
 })

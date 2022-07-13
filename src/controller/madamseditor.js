@@ -150,7 +150,7 @@ class MadamsEditor_UI {
 
         // init data editor
         this.dataEditor = ace.edit("data-editor" ,{
-            mode: "ace/mode/json",
+            mode: "ace/mode/text",
             theme: "ace/theme/tomorrow",
         });
 
