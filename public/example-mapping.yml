@@ -44,6 +44,6 @@ mappings:
     po:
       - [vcard:family-name, "Weber"]
       - [vcard:given-name, "Matthias"]
-      - [vcard:hasEmail, "mailto\:matthias.weber@iwm.fraunhofer.de"]
+      - [vcard:hasEmail, "mailto:matthias.weber@iwm.fraunhofer.de"]
       - [vcard:hasOrganizationName, "https://www.iwm.fraunhofer.de"]
       - [vcard:nickname, "wbr"]
