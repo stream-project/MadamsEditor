@@ -1,6 +1,6 @@
 <template>
   <div class="editor-title">
-    <span id="data-filename">Data</span> <small class="text-muted">(JSON)</small>
+    <span id="data-filename">Data</span> <small class="text-muted">(JSON or CSV)</small>
   </div>
   <div id="data-editor" class="editor"></div>
 </template>
