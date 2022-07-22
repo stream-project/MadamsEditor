@@ -1,14 +1,14 @@
-# MaDaMs Editor (**Ma**terial **Da**ta **M**apping)
+# RML (YARRRML) Editor
 
-(yet simple) Text based editor to map JSON data with [YARRRML](http://rml.io/yarrrml/) (a human-readible form of RDF Mapping Language [[RML](https://rml.io/specs/rml/)]) to RDF.
+(yet simple) Text based editor to map JSON or CSV data with [YARRRML](http://rml.io/yarrrml/) (a human-readible form of RDF Mapping Language [[RML](https://rml.io/specs/rml/)]) to RDF.
 
-The RML to YARRRML is based on [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser).
+The RML to YARRRML and vice versa is based on [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser).
 
-To apply the mappings on the data an RML Mapper service is **required**. We use the Node JavaScript library [RocketRML](https://github.com/semantifyit/RocketRML) for this.
+To apply the mappings on the data an RML Mapper service is **required**. We use the Java library [RMLMapper](https://github.com/RMLio/rmlmapper-java) for this.
 
 ## Screenshot
 
-![Screenshot](./screenshot.png)
+![Screenshot](./rmleditor.png)
 
 ## Deployment
 
@@ -18,11 +18,11 @@ Both have to be started manually or in docker.
 
 ## Manually
 
-Initialize:
+Installation:
 `npm install`
 
 Service:
-`node server.js`
+`npm run service`
 
 GUI:
 `npm run serve`
@@ -70,19 +70,27 @@ The secret value could be found in the webhook config on the server.
 - [YARRRML](https://rml.io/yarrrml/spec/)
 - [JSONPath](https://goessner.net/articles/JsonPath/index.html), [more JSONPath](https://gregsdennis.github.io/Manatee.Json/usage/path.html), [JSONPath-Plus](https://github.com/JSONPath-Plus/JSONPath)
 - [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser)
-- [RocketRML](https://github.com/semantifyit/RocketRML)
+- [RMLMApper](https://github.com/RMLio/rmlmapper-java)
 
 ## Packages
 
 ```
-"@rmlio/yarrrml-parser": "^1.2.1",  #convert YARRRML rules to RML or R2RML rules
-"ace-builds": "^1.4.12",            #code editor
-"cors": "^2.8.5",                   #providing a Connect/Express middleware that can be used to enable CORS with various options
-"express": "^4.17.1",               #Fast, unopinionated, minimalist web framework
-"jquery": "^3.5.1",                 #fast, small, and feature-rich JavaScript library
-"js-yaml": "^4.0.0",                #implementation of YAML
-"n3": "^1.6.4",                     #The N3.js library is an implementation of the RDF.js low-level specification that lets you handle RDF in JavaScript easily. It offers: parsing, writing, storage
-"rocketrml": "^1.8.2",              #RML-mapper implementation for the RDF mapping language (RML)
-"split.js": "^1.6.2",               #2kb unopinionated utility for resizeable split views
-"underscore": "^1.12.0"             #utility-belt library for JavaScript that provides support for the usual functional suspects (each, map, reduce, filter...) without extending any core JavaScript objects
+"@dvuckovic/vue3-bootstrap-icons": "^1.0.4",
+"@rmlio/rmlmapper-java-wrapper": "^2.0.3",    #wrapper for a RML-mapper implementation for the RDF mapping language (RML)
+"@rmlio/yarrrml-parser": "^1.3.5",            #convert YARRRML rules to RML or R2RML rules
+"ace-builds": "^1.4.13",                      #code editor
+"axios": "^0.24.0",
+"bootstrap": "^5.1.3",
+"core-js": "^3.20.0",
+"cors": "^2.8.5",                             #providing a Connect/Express middleware that can be used to enable CORS with various options
+"express": "^4.17.2",                         #Fast, unopinionated, minimalist web framework
+"jquery": "^3.6.0",                           #fast, small, and feature-rich JavaScript library
+"js-yaml": "^4.1.0",                          #implementation of YAML
+"n3": "^1.13.0",                              #The N3.js library is an implementation of the RDF.js low-level specification that lets you handle RDF in JavaScript easily. It offers: parsing, writing, storage
+"sparql-http-client": "^2.4.0",
+"splitpanes": "^3.0.6",
+"underscore": "^1.13.2",                      #utility-belt library for JavaScript that provides support for the usual functional suspects (each, map, reduce, filter...) without extending any core JavaScript objects
+"uuid": "^8.3.2",
+"vue": "^3.2.26",
+"vue-sweetalert2": "^5.0.2"                   #Good looking and easy to use modals
 ```
