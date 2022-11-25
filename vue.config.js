@@ -4,5 +4,5 @@ module.exports = {
     devServer: {
       public: 'rmleditor.stream-dataspace.net'
     }
-  }
-}
+  },
+};
