@@ -5,5 +5,14 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import BootstrapIcon from '@dvuckovic/vue3-bootstrap-icons'
+import router from './router'
+//import LaravelVuePagination from 'laravel-vue-pagination';
+import Paginate from "vuejs-paginate-next";
 
-createApp(App).component('BootstrapIcon', BootstrapIcon).use(VueSweetalert2).mount('#app')
+
+const app = createApp(App)
+app.component('BootstrapIcon', BootstrapIcon)
+app.use(router)
+app.use(VueSweetalert2)
+app.use(Paginate)
+app.mount('#app')
