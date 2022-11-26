@@ -6,31 +6,68 @@
       which is explained in the guide section on v-for.
     -->
     <TodoItem
-      v-for="item in groceryList"
+      v-for="item in showList"
       :todo="item"
       :key="item.id"
     ></TodoItem>
+    <div id="paginationDiv">
+      <paginate
+        id="unit"
+        :page-count="totalPages"
+        :page-range="5"
+        :margin-pages="0"
+        :initial-page="1"
+        :click-handler="clickCallback"
+        :prev-class="'ignore'"
+        :next-class="'ignore'"
+        :disabled-class="'ignore'"
+      ></paginate>
+    </div>
     
 
 </template>
 
 <script>
 import TodoItem from '@/components/FilesListItem'
+import VuejsPaginateNext from '@/components/files-paginator.vue'
+let dummyList = []
+for(let i = 1; i<=11; i++){
+  dummyList.push({id: 1000 + i, text: 'File_'+i+'.txt'})
+}
+var pagesize  = 5
+
 export default {
   name: 'FilesView',
   components: {
-    TodoItem
+    TodoItem,
+    Paginate: VuejsPaginateNext
   },
+  methods: {
+      clickCallback (pageNum) {
+        console.log(pageNum)
+        var start = (pageNum - 1) * pagesize
+        var end = Math.min(dummyList.length, pageNum * pagesize)
+        if(start < dummyList.length)
+          this.showList = dummyList.slice(start, end)
+      }
+    },
   data() {
     return {
-      groceryList: [
-        { id: 10001, text: 'File-10001.ttl' },
-        { id: 10002, text: 'File-10002.ttl' },
-        { id: 10003, text: 'File-10003.ttl' },
-        { id: 10004, text: 'File-10004.ttl' },
-        { id: 10005, text: 'File-10005.ttl' }
-      ]
+      showList: dummyList.slice(0, Math.min(dummyList.length, pagesize)),
+      page: 1,
+      totalPages: Math.ceil(dummyList.length / pagesize)
     }
-  }
-}
+  },
+  
+};
 </script>
+
+<style>
+div#paginationDiv
+{
+
+    margin: 10px;
+    padding: 10px;
+}
+</style>
+
