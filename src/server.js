@@ -49,10 +49,16 @@ app.get('/', (req, res) => {
 app.post('/rmlmapper', async (req, res, next) => {
     req.accepts('application/json')
 
-    const mapping = req.body.rml.replace('data.file', 'temp/output.turtle') || false;
-    const sources = req.body.sources || false;
-    if (!mapping || !sources) {
-        return res.status(500).send({ error: 'Parameter missing!' })
+    var mapping = '', sources = '';
+    try {
+      mapping = req.body.rml.replace('data.file', 'temp/output.turtle') || false;
+      sources = req.body.sources || false;
+      if (!mapping || !sources) {
+          return res.status(500).send({ error: 'Parameter missing!' })
+      }
+    } catch (e) {
+      console.error(err);
+      res.status(500).send({ error: 'There is an issue with the server - contact an admin.' });
     }
 
     try {
