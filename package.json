@@ -25,7 +25,7 @@
     "js-yaml": "^4.1.0",
     "laravel-vue-pagination": "^3.0.0",
     "n3": "^1.13.0",
-    "sparql-http-client": "^2.4.0",
+    "sparql-http-client": "^2.4.1",
     "splitpanes": "^3.0.6",
     "underscore": "^1.13.2",
     "uuid": "^8.3.2",

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
       <img src="logo-header.png" height=40 alt="MADAMS EDITOR" loading="lazy">
@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="/">Editor</a>
-          <a class="nav-item nav-link" href="/files">Files</a>
+          <a class="nav-item nav-link" href="/files">Mappings</a>
         </div>
     </div>
     <a class="nav-link btn btn-primary" id="convert-btn" href="#" title="Apply Mapping (Ctrl + Enter)" style="color: #fff !important;">
@@ -20,6 +20,13 @@
     </a>
   </nav>
   <router-view/>
+</template> -->
+
+<template>
+  <div id="app">
+    <NavBar />
+    <router-view/>
+  </div>
 </template>
 
 <style>
@@ -30,8 +37,21 @@
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  height: 60px;
-}
 </style>
+
+<script>
+import NavBar from "./components/navbar.vue";
+
+export default {
+  components: { NavBar },
+  computed: {
+    loaded() {
+      return this.$store.state.loadState == "loaded";
+    }
+  }
+};
+</script>
+
+
+
+

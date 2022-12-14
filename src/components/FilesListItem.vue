@@ -1,7 +1,9 @@
 <script>
 export default {
   props: {
-    todo: Object
+    todo: Object,
+    downloadCallback: Object,
+    deleteCallback: Object,
   }
 }
 </script>
@@ -9,6 +11,7 @@ export default {
 <style>
 .card {
     margin: 10px;
+    text-align: left;
 }
 
 .scroll-box {
@@ -17,8 +20,8 @@ export default {
     padding: 1rem
 }
 
-.card-body{
-
+button{
+  margin-right: 10px;
 } 
 </style>
 
@@ -31,8 +34,11 @@ export default {
     <div class="card-body">
       <p class="card-text">Name: {{todo.text}} </p>
       
-        <button id="btn_{{todo.id}}" type="button" class="btn btn-primary">
-          Download file
+        <button v-bind:id="'btn_download_'+ todo.id" type="button" class="btn btn-primary"  @click="downloadCallback(todo.id)" >
+          Download mapping
+        </button>
+        <button v-bind:id="'btn_delete_'+ todo.id" type="button" class="btn btn-danger"  @click="deleteCallback(todo.id)">
+          Delete mapping
         </button>
 
     </div>

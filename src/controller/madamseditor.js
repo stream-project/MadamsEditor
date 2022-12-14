@@ -411,6 +411,7 @@ class MadamsEditor_Parser {
                 });
             })
             .then(response => {
+                console.log(response)
                 if (!response.ok) {
                     return response.text().then(e => {
                         e = JSON.parse(e);

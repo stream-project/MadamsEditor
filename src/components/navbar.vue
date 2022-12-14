@@ -5,12 +5,15 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Editor</a>
-          <a class="nav-item nav-link" href="#">Files</a>
+          <div v-on:click="onEditorTabClick">
+            <router-link v-bind:class="'nav-item nav-link '+ editorFocus" to="/">Editor</router-link> 
+          </div>
+          <div v-on:click="onFilesTabClick">
+            <router-link v-bind:class="'nav-item nav-link '+ filesFocus" to="/files">Mappings</router-link>
+          </div>
         </div>
     </div>
-
-    <a class="nav-link btn btn-primary" id="convert-btn" href="#" title="Apply Mapping (Ctrl + Enter)" style="color: #fff !important;">
+    <a v-show="convertBtnStatus" class="nav-link btn btn-primary" id="convert-btn" href="#" title="Apply Mapping (Ctrl + Enter)" style="color: #fff !important;">
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">
         <path
@@ -25,7 +28,26 @@
 <script>
 
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    data() {
+      return{
+        convertBtnStatus : true,
+        editorFocus: 'active',
+        filesFocus: ''
+      }
+    },
+    methods: {
+       onFilesTabClick : function(){
+        this.convertBtnStatus = false
+        this.filesFocus = 'active'
+        this.editorFocus = ''
+       },
+       onEditorTabClick : function(){
+        this.convertBtnStatus = true
+        this.filesFocus = ''
+        this.editorFocus = 'active'
+       }
+    }
 }
 </script>
 

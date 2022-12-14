@@ -9,6 +9,8 @@
       v-for="item in showList"
       :todo="item"
       :key="item.id"
+      :downloadCallback="downloadCallback"
+      :deleteCallback="deleteCallback"
     ></TodoItem>
     <div id="paginationDiv">
       <paginate
@@ -17,7 +19,7 @@
         :page-range="5"
         :margin-pages="0"
         :initial-page="1"
-        :click-handler="clickCallback"
+        :click-handler="pageClickCallback"
         :prev-class="'ignore'"
         :next-class="'ignore'"
         :disabled-class="'ignore'"
@@ -32,7 +34,7 @@ import TodoItem from '@/components/FilesListItem'
 import VuejsPaginateNext from '@/components/files-paginator.vue'
 let dummyList = []
 for(let i = 1; i<=11; i++){
-  dummyList.push({id: 1000 + i, text: 'File_'+i+'.txt'})
+  dummyList.push({id: 1000 + i, text: 'File_'+i+'.rml'})
 }
 var pagesize  = 5
 
@@ -43,13 +45,20 @@ export default {
     Paginate: VuejsPaginateNext
   },
   methods: {
-      clickCallback (pageNum) {
+      pageClickCallback (pageNum) {
         console.log(pageNum)
         var start = (pageNum - 1) * pagesize
         var end = Math.min(dummyList.length, pageNum * pagesize)
         if(start < dummyList.length)
           this.showList = dummyList.slice(start, end)
-      }
+      },
+      downloadCallback(id){
+        console.log('download' + id)
+
+      },
+      deleteCallback(id){
+        console.log('delete' + id)
+      } 
     },
   data() {
     return {
