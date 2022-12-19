@@ -2,8 +2,12 @@
 export default {
   props: {
     todo: Object,
-    downloadCallback: Object,
-    deleteCallback: Object,
+    downloadCallback: {
+        type: Function
+      },
+    deleteCallback: {
+        type: Function
+      },
   }
 }
 </script>
@@ -33,7 +37,7 @@ button{
     </div>
     <div class="card-body">
       <p class="card-text">Name: {{todo.text}} </p>
-      
+      <!-- <router-link :to="{ name: 'EditorView', query: { rml: '1234' } }">Mappings</router-link> -->
         <button v-bind:id="'btn_download_'+ todo.id" type="button" class="btn btn-primary"  @click="downloadCallback(todo.id)" >
           Download mapping
         </button>

@@ -1,0 +1,4 @@
+flask
+waitress
+Flask-Cors
+requests

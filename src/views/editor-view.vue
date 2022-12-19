@@ -60,7 +60,8 @@ export default {
     },
     data() {
         return {
-            tagsWereChanged: false
+            tagsWereChanged: false,
+            options: {} 
         }
     },
     created() {
@@ -106,8 +107,9 @@ export default {
     },
     mounted() {
         console.log(process.env);
+        // console.log(this.$route.query);
 
-        let options = {
+        this.options = {
           'data': {
             'type': 'url' , // url|json
             'value': './data.file', // string|json
@@ -121,11 +123,11 @@ export default {
           'rmlMapperUrl': process.env.VUE_APP_SERVICE_URL
         };
 
-        options.run = function (mapping, result) {
+        this.options.run = function (mapping, result) {
           // the variable 'this' contains the MadamsEditor class
           console.log('Run', mapping, result);
         }
-        new MadamsEditor(options);
+        new MadamsEditor(this.options);
     }
 }
 </script>

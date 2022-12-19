@@ -2,7 +2,9 @@
 let yarrrml_lib = require('@rmlio/yarrrml-parser/lib/rml-generator');
 import jsyaml from 'js-yaml';
 const N3 = require('n3');
+const crypto = require('crypto')
 
+// import {insert} from './db-controller.js'
 // load ace editor, themes and modes
 import ace from 'ace-builds/src-min-noconflict/ace'
 import 'ace-builds/src-min-noconflict/theme-tomorrow'
@@ -129,6 +131,12 @@ class MadamsEditor_UI {
             e.preventDefault();
         })
 
+        // init save-rml btn event
+        document.querySelector("#save-rml-btn").addEventListener("click", (e) => {
+            this.handleClickSaveRmlBtn(e);
+            e.preventDefault();
+        })
+
         // ctrl+enter shortcut
         document.addEventListener('keydown', (e) => {
             if (e.code == 'Enter' && e.ctrlKey) {
@@ -224,6 +232,38 @@ class MadamsEditor_UI {
         document.querySelector("#data-wrapper").classList.remove('h-50');
     }
 
+    handleClickSaveRmlBtn() { 
+        console.log('Click detected!');
+        var rml = this.rmlEditor.getValue().trim()
+        if(rml != ""){
+            var obj = new Object();
+            obj.id = crypto.createHash('sha1').update(rml).digest('hex');
+            obj.lines  = rml;
+            fetch("http://127.0.0.1:5001/addrmlfile", {
+                method: "POST",
+                // mode: 'no-cors',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(res => {
+                if(res.status == 200){
+                    this.addMessage('success', 'RML saved with id: ' + obj.id);
+                }
+                else if(res.status == 409){
+                    this.addMessage('error', 'RML fle already exists with id: ' + obj.id);
+                }
+                else if(res.status == 422){
+                    this.addMessage('error', 'Upload failed: RML fle not accepted!');
+                }
+            })
+            .catch(e => {
+                this.addMessage('error', 'RML Save failed: ' + e);
+            })
+        } 
+
+    } 
     handleClickRunBtn() {
         let result = false;
         const btn = document.querySelector("#convert-btn");
@@ -411,7 +451,7 @@ class MadamsEditor_Parser {
                 });
             })
             .then(response => {
-                console.log(response)
+                //console.log(response)
                 if (!response.ok) {
                     return response.text().then(e => {
                         e = JSON.parse(e);

@@ -6,13 +6,21 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <div v-on:click="onEditorTabClick">
-            <router-link v-bind:class="'nav-item nav-link '+ editorFocus" to="/">Editor</router-link> 
+            <a v-bind:class="'nav-item nav-link '+ editorFocus" href="/">Editor</a>
+            <!-- <router-link v-bind:class="'nav-item nav-link '+ editorFocus" to="/">Editor</router-link>  -->
+            <!-- Not using router-link for editor as the RML is not generated otherwise -->
           </div>
           <div v-on:click="onFilesTabClick">
             <router-link v-bind:class="'nav-item nav-link '+ filesFocus" to="/files">Mappings</router-link>
           </div>
         </div>
     </div>
+
+    <a v-show="convertBtnStatus" class="nav-link btn btn-danger" id="save-rml-btn" href="#" title="Upload RML mapping" style="color: #fff !important; margin-right: 10px;">
+      <span class="loader spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      Save RML
+    </a>
+
     <a v-show="convertBtnStatus" class="nav-link btn btn-primary" id="convert-btn" href="#" title="Apply Mapping (Ctrl + Enter)" style="color: #fff !important;">
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">
