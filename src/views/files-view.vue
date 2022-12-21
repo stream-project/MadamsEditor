@@ -50,7 +50,7 @@ export default {
   },
   methods: {
       fetchData(){
-        fetch("http://127.0.0.1:5001/getrmlfiles")
+        fetch(process.env.VUE_APP_PYTHON_BACKEND + "/getrmlfiles")
         .then(data => {
             if (!data.ok) {
                 throw new Error('Network response was not ok');
@@ -58,7 +58,7 @@ export default {
             return data.json()
             })
             .then(json => {
-              var nameList = json.map( (file_name) => {
+              let nameList = json.map( (file_name) => {
                 return {id: file_name.split('.')[0] , text: file_name} 
               });
               console.log(nameList)
@@ -72,15 +72,15 @@ export default {
       },
       pageClickCallback (pageNum) {
         console.log(pageNum)
-        var start = (pageNum - 1) * pagesize
-        var end = Math.min(this.dummyList.length, pageNum * pagesize)
+        let start = (pageNum - 1) * pagesize
+        let end = Math.min(this.dummyList.length, pageNum * pagesize)
         if(start < this.dummyList.length)
           this.showList = this.dummyList.slice(start, end)
       },
       downloadCallback(id){
         console.log('download' + id)
-        var data = { "id" : id };
-        var url = new URL("http://127.0.0.1:5001/getrmlfile");
+        let data = { "id" : id };
+        let url = new URL(process.env.VUE_APP_PYTHON_BACKEND + "/getrmlfile");
         for (let k in data) { url.searchParams.append(k, data[k]); }
         fetch(url)
         .then(data => {
@@ -91,9 +91,9 @@ export default {
             })
             .then(text => {
               console.log(text)
-              var c = document.createElement("a");
+              let c = document.createElement("a");
               c.download = id + ".rml";
-              var t = new Blob([text], {
+              let t = new Blob([text], {
               type: "text/rml"
               });
               c.href = window.URL.createObjectURL(t);
@@ -106,8 +106,8 @@ export default {
       },
       deleteCallback(id){
         console.log('delete' + id)
-        var data = { "id" : id };
-        var url = new URL("http://127.0.0.1:5001/deletermlfile");
+        let data = { "id" : id };
+        let url = new URL(process.env.VUE_APP_PYTHON_BACKEND + "/deletermlfile");
         for (let k in data) { url.searchParams.append(k, data[k]); }
         fetch(url, {
                 method: "DELETE"

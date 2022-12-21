@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, request
 import flask
 from utils import addRmlFile, getRmlFile, getRmlFilePath, getRmlFileNames, deleteRmlFile
 from flask_cors import CORS
@@ -14,7 +14,7 @@ def index():
 def getrmlfile():
     id = request.args.get("id")
     print(id)
-    if(id):
+    if(id.isalnum()):
         rml_file = getRmlFile(id)
         # app.logger.info(rml_file)
         resp = flask.Response(rml_file)
@@ -29,7 +29,7 @@ def addrmlfile():
     if (content_type == 'application/json'):
         json = request.json
         id, lines = json['id'] , json['lines']
-        if(getRmlFilePath(id) == ""):
+        if(getRmlFilePath(id) == "" and id.isalnum()):
             statusCode = addRmlFile(id, lines)
             if statusCode == 200:
                 return json['id'], statusCode
@@ -47,7 +47,7 @@ def getRmlFiles():
 @app.route("/deletermlfile", methods=['DELETE'] )
 def deletermlfile():
     id = request.args.get("id")
-    if(id):
+    if(id.isalnum()):
         status_code = deleteRmlFile(id)
         if(status_code == 404):
             return 'RML file not found!', status_code

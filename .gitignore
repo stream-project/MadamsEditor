@@ -26,3 +26,4 @@ pnpm-debug.log*
 temp
 
 python-backend/result_files/*.rml
+*.pyc

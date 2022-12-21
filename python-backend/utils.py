@@ -1,11 +1,4 @@
-from flask import Flask, wrappers, request
-from multiprocessing import Pool
-import json
-import threading
-import os, requests
-import logging
-import  asyncio
-
+import os
 from dbConnect import getSPARQL
 
 final_download_folder = os.path.abspath('result_files')

@@ -1,14 +1,19 @@
-# import sparql
-# s = sparql.Service('http://dba:DbaGraphPassword@localhost:1111', "utf-8", "GET")
-
-from SPARQLWrapper import SPARQLWrapper, JSON, POST, DIGEST
+from SPARQLWrapper import SPARQLWrapper, JSON, POST, DIGEST, XML, RDF
+import urllib
 sparql = SPARQLWrapper("http://localhost:8890/sparql")
 
 sparql.setHTTPAuth(DIGEST)
-sparql.setCredentials("dba", "DbaGraphPassword")
+sparql.setCredentials("SPARQL", "pwd")
 sparql.setMethod(POST)
+# sparql.setReturnFormat(RDF)
 
-sparql.setQuery("DESCRIBE <http://www.example.com/my-graph>")
-results = sparql.query()
-print (results.response.read())
-#print(results.serialize(format="json-ld"))
+with open("mn_rml.rml", "r") as f:
+    lines = f.read()
+# query = "select distinct * where { graph <http://localhost:8890/dummy> {?s ?p ?o .}  }"
+query= "CONSTRUCT { ?s ?p ?o . } FROM <http://mapping.stream.com#feecd2c0bc7d7727f169f702019904cc25c5e5dd> WHERE {  ?s ?p ?o . }"
+
+sparql.setQuery(query)
+results = sparql.queryAndConvert()
+# results = sparql.query()
+#print(results)
+print(results.serialize()) 

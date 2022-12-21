@@ -21,7 +21,7 @@
     "core-js": "^3.20.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "express": "^4.17.2",
+    "express": "^4.18.2",
     "jquery": "^3.6.0",
     "js-yaml": "^4.1.0",
     "laravel-vue-pagination": "^3.0.0",
