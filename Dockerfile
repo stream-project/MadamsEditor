@@ -16,4 +16,6 @@ COPY retrieveRMLMapper.sh ./
 RUN ./retrieveRMLMapper.sh
 RUN mkdir temp
 
-ENTRYPOINT npm run serve
+EXPOSE 7000
+
+ENTRYPOINT npm run serve -- --port 7000
