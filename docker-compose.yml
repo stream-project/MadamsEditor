@@ -45,7 +45,7 @@ services:
       - DEFAULT_GRAPH=${DEFAULT_GRAPH} 
       - DBA_PASSWORD=${DBA_PASSWORD} 
     volumes:
-      - ./data/virtuoso:/data/virtuoso
+      - virtuoso-database:/data/virtuoso
     ports:
       - "8890:8890"
     networks:
@@ -60,7 +60,7 @@ services:
       - USERNAME=${USERNAME} 
       - PASSWORD=${PASSWORD}
     volumes:
-      - ./result_files:/result_files
+      - result_files:/result_files
     expose:
       - "5001"
     networks:
@@ -71,3 +71,7 @@ services:
 networks:
   intranet:
     driver: bridge
+
+volumes:
+  result_files:
+  virtuoso-database:

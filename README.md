@@ -6,6 +6,8 @@ The RML to YARRRML and vice versa is based on [YARRRML-Parser](https://github.co
 
 To apply the mappings on the data an RML Mapper service is **required**. We use the Java library [RMLMapper](https://github.com/RMLio/rmlmapper-java) for this.
 
+GUI also provides an option to save the RML mappings, download and manage them.
+
 ## Screenshot
 
 ![Screenshot](./rmleditor.png)
@@ -32,6 +34,12 @@ GUI:
 Use the images from Github: ghcr.io/stream-project/rmleditor:master
 
 In this repository is also an example docker-compose file.
+
+To use the CRUD opertions, the instances should be run by docker-compose file.
+
+To set the environment variables, refer to `.env.template` file.
+
+Also don't forget to create a user for Virtuoso with SPARQL read, write and update permissions. Virtuso console can be accessed at `<HOST>:8890`
 
 ## Usage as library
 
@@ -71,10 +79,14 @@ The secret value could be found in the webhook config on the server.
 - [JSONPath](https://goessner.net/articles/JsonPath/index.html), [more JSONPath](https://gregsdennis.github.io/Manatee.Json/usage/path.html), [JSONPath-Plus](https://github.com/JSONPath-Plus/JSONPath)
 - [YARRRML-Parser](https://github.com/RMLio/yarrrml-parser)
 - [RMLMApper](https://github.com/RMLio/rmlmapper-java)
+- [Virtuoso Docker](https://github.com/tenforce/docker-virtuoso)
 
 ## Packages
 
 ```
+npm packages
+-------------
+
 "@dvuckovic/vue3-bootstrap-icons": "^1.0.4",
 "@rmlio/rmlmapper-java-wrapper": "^2.0.3",    #wrapper for a RML-mapper implementation for the RDF mapping language (RML)
 "@rmlio/yarrrml-parser": "^1.3.5",            #convert YARRRML rules to RML or R2RML rules
@@ -83,14 +95,33 @@ The secret value could be found in the webhook config on the server.
 "bootstrap": "^5.1.3",
 "core-js": "^3.20.0",
 "cors": "^2.8.5",                             #providing a Connect/Express middleware that can be used to enable CORS with various options
+"crypto": "^1.0.1"
 "express": "^4.17.2",                         #Fast, unopinionated, minimalist web framework
 "jquery": "^3.6.0",                           #fast, small, and feature-rich JavaScript library
 "js-yaml": "^4.1.0",                          #implementation of YAML
+"laravel-vue-pagination": "^3.0.0"
 "n3": "^1.13.0",                              #The N3.js library is an implementation of the RDF.js low-level specification that lets you handle RDF in JavaScript easily. It offers: parsing, writing, storage
 "sparql-http-client": "^2.4.0",
 "splitpanes": "^3.0.6",
 "underscore": "^1.13.2",                      #utility-belt library for JavaScript that provides support for the usual functional suspects (each, map, reduce, filter...) without extending any core JavaScript objects
 "uuid": "^8.3.2",
 "vue": "^3.2.26",
-"vue-sweetalert2": "^5.0.2"                   #Good looking and easy to use modals
+"vue-sweetalert2": "^5.0.2"                   #Good looking 
+and easy to use modals
+"vue-router": "^4.1.5"
+
+Python packages
+----------------
+
+flask
+waitress
+Flask-Cors
+requests
+SPARQLWrapper
 ```
+External docker images
+-----------------------
+- [nginx](https://hub.docker.com/_/nginx/) 
+- [Virtuoso Docker](https://github.com/tenforce/docker-virtuoso)
+
+
