@@ -8,9 +8,11 @@ To apply the mappings on the data an RML Mapper service is **required**. We use 
 
 GUI also provides an option to save the RML mappings, download and manage them.
 
-## Screenshot
+## Screenshots
 
-![Screenshot](./rmleditor.png)
+![Screenshot](./editor.png)
+
+![Screenshot](./mapping_list.png)
 
 ## Deployment
 
