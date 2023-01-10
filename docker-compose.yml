@@ -1,14 +1,77 @@
-version: "3.8"
+version: "3.3"
 services:
+  nginx:
+    image: nginx:1.21.6-alpine
+    ports:
+      - "80:8000"
+    depends_on:
+      - vue
+    networks:
+      - intranet
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/no-ssl.conf:/etc/nginx/conf.d/default.conf
+      #- ./nginx/ssl.conf:/etc/nginx/conf.d/default.conf
+      #- ${CERT_PATH}:/etc/ssl/certs/fullchain.pem
+      #- ${CERT_KEY_PATH}:/etc/ssl/certs/privkey.pem
+
   vue:
-    image: ghcr.io/stream-project/rmleditor:master
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - VUE_APP_SERVICE_URL=${VUE_APP_SERVICE_URL}
-    ports:
-      - 80:8080
+      - VUE_APP_PYTHON_BACKEND=${VUE_APP_PYTHON_BACKEND} 
+    expose:
+      - "7000"
+    networks:
+      - intranet
 
   service:
-    image: ghcr.io/stream-project/rmleditor:master
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     entrypoint: npm run service
+    expose:
+      - "3000"
+    networks:
+      - intranet
+
+  virtuoso-db:
+    image: tenforce/virtuoso:1.3.1-virtuoso7.2.2
+    environment:
+      - SPARQL_UPDATE="true"
+      - DEFAULT_GRAPH=${DEFAULT_GRAPH} 
+      - DBA_PASSWORD=${DBA_PASSWORD} 
+    volumes:
+      - virtuoso-database:/data/virtuoso
     ports:
-      - 3000:3000
+      - "8890:8890"
+    networks:
+      - intranet
+
+  python-backend:
+    build:
+      context: python-backend
+      dockerfile: Dockerfile
+    environment:
+      - VIRTUOSO_SPARQL=${VIRTUOSO_SPARQL}
+      - USERNAME=${USERNAME} 
+      - PASSWORD=${PASSWORD}
+    volumes:
+      - result_files:/result_files
+    expose:
+      - "5001"
+    networks:
+      - intranet
+    depends_on:
+      - virtuoso-db
+
+networks:
+  intranet:
+    driver: bridge
+
+volumes:
+  result_files:
+  virtuoso-database:

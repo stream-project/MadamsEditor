@@ -1,0 +1,6 @@
+flask
+waitress
+Flask-Cors
+requests
+SPARQLWrapper
+python-dotenv
